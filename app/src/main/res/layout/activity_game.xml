@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/purple_700"
+    tools:context=".GameActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/drawView"
+        android:layout_weight="1"/>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75">
+        <ImageView
+            android:layout_width="270dp"
+            android:layout_height="140dp"
+            android:id="@+id/helper"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"/>
+        <Spinner
+            android:background="@color/white"
+            android:id="@+id/spinnerChoose"
+            android:layout_width="match_parent"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/helper"
+            android:layout_marginTop="80dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_below="@+id/helper"
+            android:id="@+id/editTexts">
+            <EditText
+                android:hint="1 Координата"
+                android:id="@+id/edFirst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:hint="2 Координата"
+                android:id="@+id/edSecond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:hint="3 Координата"
+                android:id="@+id/edThird"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:hint="4 Координата"
+                android:id="@+id/edFourth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <Button
+            android:text="Save"
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTexts"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSave"
+            android:id="@+id/tvHelp"/>
+    </RelativeLayout>
+
+</LinearLayout>

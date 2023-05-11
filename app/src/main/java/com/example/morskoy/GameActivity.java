@@ -16,17 +16,14 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     LinearLayout drawView;
+    Draw draw;
+    Game game;
     TextView tvHelp;
-    ImageView helper;
     Spinner spinnerChoose;
     LinearLayout editTexts;
     Button btnSave;
     EditText edFirst, edSecond, edThird, edFourth;
-    String ships[] = new String[]{"...","Однопалубный","Двухпалубный","Трехпалубный","Четырехпалубный"};
-    int firstEdit = 0;
-    int secondEdit = 0;
-    int thirdEdit = 0;
-    int fourthEdit = 0;
+    String ships[] = new String[]{"Корабль","Однопалубный","Двухпалубный","Трехпалубный","Четырехпалубный"};
 
 
     @Override
@@ -36,8 +33,8 @@ public class GameActivity extends AppCompatActivity {
         w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
         drawView = findViewById(R.id.drawView);
-        drawView.addView(new DrawView(this));
-        helper = findViewById(R.id.helper);
+        game = new Game();
+        drawView.addView(new Draw(this, game));
         tvHelp = findViewById(R.id.tvHelp);
         spinnerChoose = findViewById(R.id.spinnerChoose);
         editTexts = findViewById(R.id.editTexts);
@@ -46,6 +43,12 @@ public class GameActivity extends AppCompatActivity {
         edSecond = findViewById(R.id.edSecond);
         edThird = findViewById(R.id.edThird);
         edFourth = findViewById(R.id.edFourth);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                draw.invalidate();
+            }
+        });
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ships);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChoose.setAdapter(adapter);

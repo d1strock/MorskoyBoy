@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout editTexts;
     Button btnSave;
     EditText edFirst, edSecond, edThird, edFourth;
+    int first = 0;
     String ships[] = new String[]{"Корабль","Однопалубный","Двухпалубный","Трехпалубный","Четырехпалубный"};
 
 
@@ -34,7 +35,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         drawView = findViewById(R.id.drawView);
         game = new Game();
-        drawView.addView(new Draw(this, game));
+        draw = new Draw(this, game);
+        drawView.addView(draw);
         tvHelp = findViewById(R.id.tvHelp);
         spinnerChoose = findViewById(R.id.spinnerChoose);
         editTexts = findViewById(R.id.editTexts);
@@ -46,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                game.first1 = Integer.parseInt(edFirst.getText().toString());
                 draw.invalidate();
             }
         });

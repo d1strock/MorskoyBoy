@@ -4,11 +4,20 @@ public class Game {
     int n = 11;
     int m = 11;
     int battle[][] = new int[n][m];
-    int left = 170;
-    int right = 240;
-    int top = 200;
-    int bottom = 130;
-    int first1 = 0;
+//    int left = 170;
+//    int right = 240;
+//    int top = 200;
+//    int bottom = 130;
+    int firstEd, secondEd, thirdEd, fourthEd;
+    int firstOne;
+    int firstSecond;
+    int x = 170;
+    int y = 200;
+    int margin = 7;
+    int kl = 70;
+
+
+
 
 
 }

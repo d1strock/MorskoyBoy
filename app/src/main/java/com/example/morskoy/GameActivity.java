@@ -23,7 +23,6 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout editTexts;
     Button btnSave;
     EditText edFirst, edSecond, edThird, edFourth;
-    int first = 0;
     String ships[] = new String[]{"Корабль","Однопалубный","Двухпалубный","Трехпалубный","Четырехпалубный"};
 
 
@@ -48,7 +47,13 @@ public class GameActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                game.first1 = Integer.parseInt(edFirst.getText().toString());
+                game.firstEd = Integer.parseInt(edFirst.getText().toString());
+                game.firstOne = game.firstEd / 10;
+                game.firstSecond = game.firstEd % 10;
+                game.battle[game.firstOne][game.firstSecond] = 1;
+//                tvHelp.setText(Integer.toString(game.firstOne));
+                tvHelp.setText(Integer.toString(game.firstSecond));
+//                tvHelp.setText(Integer.toString(game.first1));
                 draw.invalidate();
             }
         });

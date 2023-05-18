@@ -8,46 +8,53 @@ import android.view.View;
 
 public class Draw extends View {
     Game game;
+    int margin = 7;
     Paint white = new Paint();
     Paint green = new Paint();
-    int N, M, Left, Right, Top, Bottom, firstOne, firstSecond;
     public Draw(Context context, Game g) {
         super(context);
         white.setColor(Color.WHITE);
         white.setStyle(Paint.Style.FILL);
         green.setColor(Color.GREEN);
         green.setStyle(Paint.Style.FILL);
-        N = g.n;
-        M = g.m;
-        Left = g.left;
-        Right = g.right;
-        Bottom = g.bottom;
-        Top = g.top;
-        firstOne = g.first1 / 10;
-        firstSecond = g.first1 % 10;
+        game = g;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.BLUE);
-        for (int i = 1; i < N; i++) {
-            for (int j = 1; j < M; j++) {
-                if (firstOne == i && firstSecond == j) {
-                    canvas.drawRect(Left, Top, Right, Bottom, green);
+        for (int i = 1; i < game.n; i++) {
+            for (int j = 1; j < game.m; j++) {
+                if (game.battle[i][j] == 1) {
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, green);
                 }
                 else {
-                    canvas.drawRect(Left, Top, Right, Bottom, white);
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, white);
                 }
-                Left = Left + 77;
-                Right = Right + 77;
+                game.x = game.x + game.kl + margin;
             }
-            Top = Top + 79;
-            Bottom = Bottom + 79;
-            Left = 170;
-            Right = 240;
+            game.x = 170;
+            game.y = game.y + game.kl + margin;
         }
-        Top = 200;
-        Bottom = 130;
+        game.y = 200;
+//        for (int i = 1; i < N; i++) {
+//            for (int j = 1; j < M; j++) {
+//                if (firstOne1 == i && firstSecond1 == j) {
+//                    canvas.drawRect(Left, Top, Right, Bottom, green);
+//                }
+//                else {
+//                    canvas.drawRect(Left, Top, Right, Bottom, white);
+//                }
+//                Left = Left + 77;
+//                Right = Right + 77;
+//            }
+//            Top = Top + 79;
+//            Bottom = Bottom + 79;
+//            Left = 170;
+//            Right = 240;
+//        }
+//        Top = 200;
+//        Bottom = 130;
     }
 }

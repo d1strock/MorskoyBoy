@@ -48,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 game.firstEd = Integer.parseInt(edFirst.getText().toString());
+//                if (game.firstEd < 100)
                 game.firstOne = game.firstEd / 10;
                 game.firstSecond = game.firstEd % 10;
                 game.battle[game.firstOne][game.firstSecond] = 1;

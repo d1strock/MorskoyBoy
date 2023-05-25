@@ -37,25 +37,25 @@
             android:layout_below="@+id/spinnerChoose"
             android:id="@+id/editTexts">
             <EditText
-                android:hint="1 Координата"
+                android:hint="Начальная координата"
                 android:id="@+id/edFirst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <EditText
-                android:hint="2 Координата"
+                android:hint="Конечная координата"
                 android:id="@+id/edSecond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <EditText
-                android:hint="3 Координата"
-                android:id="@+id/edThird"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:hint="4 Координата"
-                android:id="@+id/edFourth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <EditText-->
+<!--                android:hint="3 Координата"-->
+<!--                android:id="@+id/edThird"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <EditText-->
+<!--                android:hint="4 Координата"-->
+<!--                android:id="@+id/edFourth"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
         </LinearLayout>
         <Button
             android:text="Save"

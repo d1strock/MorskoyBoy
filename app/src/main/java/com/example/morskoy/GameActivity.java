@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
     LinearLayout drawView;
@@ -42,22 +43,26 @@ public class GameActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         edFirst = findViewById(R.id.edFirst);
         edSecond = findViewById(R.id.edSecond);
-        edThird = findViewById(R.id.edThird);
-        edFourth = findViewById(R.id.edFourth);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                game.firstEd = Integer.parseInt(edFirst.getText().toString());
-//                if (game.firstEd < 100)
-                game.firstOne = game.firstEd / 10;
-                game.firstSecond = game.firstEd % 10;
-                game.battle[game.firstOne][game.firstSecond] = 1;
-//                tvHelp.setText(Integer.toString(game.firstOne));
-                tvHelp.setText(Integer.toString(game.firstSecond));
-//                tvHelp.setText(Integer.toString(game.first1));
-                draw.invalidate();
-            }
-        });
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String help = edFirst.getText().toString();
+//                String help1 = edSecond.getText().toString();
+//                if (help.equals("") && help1.equals("")) {
+//                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    game.firstEd = Integer.parseInt(edFirst.getText().toString());
+//                    game.secondEd = Integer.parseInt(edSecond.getText().toString());
+//                    if (game.firstEd < 100 && game.firstEd > -1 && game.secondEd < 100 && game.secondEd > -1) {
+//                        game.battle[game.firstEd / 10][game.firstEd % 10] = 1;
+//                        game.battle[game.secondEd / 10][game.secondEd % 10] = 1;
+//                        draw.invalidate();
+//                    }
+//                    else Toast.makeText(GameActivity.this, "Неверная координата", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ships);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChoose.setAdapter(adapter);
@@ -66,34 +71,48 @@ public class GameActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 edFirst.setVisibility(View.INVISIBLE);
                 edSecond.setVisibility(View.INVISIBLE);
-                edThird.setVisibility(View.INVISIBLE);
-                edFourth.setVisibility(View.INVISIBLE);
                 int item = position;
                 switch (item) {
                     case 1:
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.INVISIBLE);
-                        edThird.setVisibility(View.INVISIBLE);
-                        edFourth.setVisibility(View.INVISIBLE);
                         break;
                     case 2:
-                        edFirst.setVisibility(View.VISIBLE);
-                        edSecond.setVisibility(View.VISIBLE);
-                        edThird.setVisibility(View.INVISIBLE);
-                        edFourth.setVisibility(View.INVISIBLE);
-                        break;
+
                     case 3:
-                        edFirst.setVisibility(View.VISIBLE);
-                        edSecond.setVisibility(View.VISIBLE);
-                        edThird.setVisibility(View.VISIBLE);
-                        edFourth.setVisibility(View.INVISIBLE);
-                        break;
+                        btnSave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String help = edFirst.getText().toString();
+                                String help1 = edSecond.getText().toString();
+                                if (help.equals("") && help1.equals("")) {
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    game.firstEd = Integer.parseInt(edFirst.getText().toString());
+                                    game.secondEd = Integer.parseInt(edSecond.getText().toString());
+                                    if (game.secondEd / 10 - game.firstEd / 10 == 2) {
+                                        game.battle[game.firstEd / 10][game.firstEd % 10] = 1;
+                                        game.battle[game.secondEd / 10][game.secondEd % 10] = 1;
+                                        game.battle[(game.firstEd / 10) + 1][game.firstEd % 10] = 1;
+                                        draw.invalidate();
+                                    }
+                                    else if (game.secondEd % 10 - game.firstEd % 10 == 2) {
+                                        game.battle[game.firstEd / 10][game.firstEd % 10] = 1;
+                                        game.battle[game.secondEd / 10][game.secondEd % 10] = 1;
+                                        game.battle[game.firstEd / 10][(game.firstEd % 10) + 1] = 1;
+                                        draw.invalidate();
+                                    }
+                                    else  Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     case 4:
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.VISIBLE);
-                        edThird.setVisibility(View.VISIBLE);
-                        edFourth.setVisibility(View.VISIBLE);
                         break;
+
+
                 }
             }
             @Override

@@ -9,12 +9,13 @@ public class Game {
 //    int top = 200;
 //    int bottom = 130;
     int firstEd, secondEd, thirdEd, fourthEd;
-    int firstOne;
-    int firstSecond;
     int x = 170;
     int y = 200;
     int margin = 7;
     int kl = 70;
+    void search() {
+
+    }
 
 
 

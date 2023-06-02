@@ -24,20 +24,30 @@ public class Draw extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.BLUE);
-        for (int i = 0; i < game.n; i++) {
-            for (int j = 0; j < game.m; j++) {
+        for (int i = 1; i < game.n; i++) {
+            for (int j = 1; j < game.m; j++) {
                 if (game.battle[i][j] == 1) {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, green);
                 }
                 else {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, white);
                 }
-                game.x = game.x + game.kl + margin;
+//                game.x = game.x + game.kl + margin;
+                game.y = game.y + game.kl + margin;
             }
-            game.x = 170;
-            game.y = game.y + game.kl + margin;
+//            game.x = 170;
+//            game.y = game.y + game.kl + margin;
+            game.y = 200;
+            game.x = game.x + game.kl + margin;
         }
-        game.y = 200;
+//        game.y = 200;
+        game.x = 170;
+
+
+
+
+
+
 //        for (int i = 1; i < N; i++) {
 //            for (int j = 1; j < M; j++) {
 //                if (firstOne1 == i && firstSecond1 == j) {

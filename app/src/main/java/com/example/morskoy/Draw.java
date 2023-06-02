@@ -32,15 +32,11 @@ public class Draw extends View {
                 else {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, white);
                 }
-//                game.x = game.x + game.kl + margin;
                 game.y = game.y + game.kl + margin;
             }
-//            game.x = 170;
-//            game.y = game.y + game.kl + margin;
             game.y = 200;
             game.x = game.x + game.kl + margin;
         }
-//        game.y = 200;
         game.x = 170;
 
 

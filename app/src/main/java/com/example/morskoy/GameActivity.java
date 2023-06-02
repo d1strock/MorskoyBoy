@@ -56,65 +56,87 @@ public class GameActivity extends AppCompatActivity {
                     case 1:
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.INVISIBLE);
+                        edFirst.setText("");
+                        btnSave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ButtonLengthOne();
+                                game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                draw.invalidate();
+                            }
+                        });
                         break;
                     case 2:
-
+                        edFirst.setVisibility(View.VISIBLE);
+                        edSecond.setVisibility(View.VISIBLE);
+                        edFirst.setText("");
+                        edSecond.setText("");
+                        btnSave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ButtonLengthTwo();
+                                if (game.secondEdLetter - game.firstEdLetter == 1 && game.firstEdNumber == game.secondEdNumber) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    draw.invalidate();
+                                } else if (game.secondEdNumber - game.firstEdNumber == 1 && game.firstEdLetter == game.secondEdLetter) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    draw.invalidate();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        break;
                     case 3:
+                        edFirst.setVisibility(View.VISIBLE);
+                        edSecond.setVisibility(View.VISIBLE);
+                        edFirst.setText("");
+                        edSecond.setText("");
                         btnSave.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 ButtonLengthTwo();
-                                if (game.firstEdLetter == -1 && game.secondEdLetter == -1) {
+                                if (game.secondEdLetter - game.firstEdLetter == 2 && game.firstEdNumber == game.secondEdNumber) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
+                                    draw.invalidate();
+                                } else if (game.secondEdNumber - game.firstEdNumber == 2 && game.firstEdLetter == game.secondEdLetter) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
+                                    draw.invalidate();
+                                } else
                                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    if (game.secondEdLetter - game.firstEdLetter == 2 && game.firstEdNumber == game.secondEdNumber) {
-                                        game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                        game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                        game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
-                                        draw.invalidate();
-                                    } else if (game.secondEdNumber - game.firstEdNumber == 2 && game.firstEdLetter == game.secondEdLetter) {
-                                        game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                        game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                        game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
-                                        draw.invalidate();
-                                    } else
-                                        Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-                                }
-//                                else if (help1.length() == 3 && help.length() == 2) {
-//                                    String letter = String.valueOf(help.charAt(0));
-//                                    game.definitionLetter(letter);
-//                                    game.firstEdLetter = game.helpLetter1;
-//                                    String letter1 = String.valueOf(help1.charAt(0));
-//                                    game.definitionLetter(letter1);
-//                                    game.secondEdLetter = game.helpLetter1;
-//                                    if (String.valueOf(help1.charAt(2)).equals("0") && String.valueOf(help.charAt(1)).equals("1")) {
-//                                        game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
-//                                        game.secondEdNumber = 10;
-//                                        if (game.firstEdLetter == -1 && game.secondEdLetter == -1) {
-//                                            Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                        else {
-//                                            if (game.secondEdLetter - game.firstEdLetter == 2) {
-//                                                game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-//                                                game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-//                                                game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
-//                                                draw.invalidate();
-//                                            } else if (game.secondEdNumber - game.firstEdNumber == 2) {
-//                                                game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-//                                                game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-//                                                game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
-//                                                draw.invalidate();
-//                                            } else
-//                                                Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                                    else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-//                                }
                             }
                         });
+                        break;
                     case 4:
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.VISIBLE);
+                        edFirst.setText("");
+                        edSecond.setText("");
+                        btnSave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ButtonLengthTwo();
+                                if (game.secondEdLetter - game.firstEdLetter == 3 && game.firstEdNumber == game.secondEdNumber) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
+                                    game.battle[game.firstEdLetter + 2][game.firstEdNumber] = 1;
+                                    draw.invalidate();
+                                } else if (game.secondEdNumber - game.firstEdNumber == 3 && game.firstEdLetter == game.secondEdLetter) {
+                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
+                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                    game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
+                                    game.battle[game.firstEdLetter][game.firstEdNumber + 2] = 1;
+                                    draw.invalidate();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         break;
                 }
             }
@@ -125,43 +147,73 @@ public class GameActivity extends AppCompatActivity {
         };
         spinnerChoose.setOnItemSelectedListener(itemSelectedListener);
     }
+    void ButtonLengthOne() {
+        String only = edFirst.getText().toString();
+        if (only.equals("")) {
+            Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+        } else {
+            String let = String.valueOf(only.charAt(0));
+            game.definitionLetter(let);
+            game.firstEdLetter = game.helpLetter1;
+            if (game.firstEdLetter == -1) {
+                Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            }
+            if (only.length() == 2) {
+                try {
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(only.charAt(1)));
+                }catch (NumberFormatException e) {
+                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                }
+            } else if (only.length() == 3) {
+                if (String.valueOf(only.charAt(1)).equals("1") && String.valueOf(only.charAt(2)).equals("0")) {
+                    game.firstEdNumber = 10;
+                }
+            }
+            else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     void ButtonLengthTwo() {
         String help = edFirst.getText().toString();
         String help1 = edSecond.getText().toString();
-        if (help.equals("") && help1.equals("")) {
+        if (help.equals("") || help1.equals("")) {
             Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             String letter = String.valueOf(help.charAt(0));
             game.definitionLetter(letter);
             game.firstEdLetter = game.helpLetter1;
             String letter1 = String.valueOf(help1.charAt(0));
             game.definitionLetter(letter1);
             game.secondEdLetter = game.helpLetter1;
-        }
-        if (help.length() == 2 && help1.length() == 2) {
-            try {
-                game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
-                game.secondEdNumber = Integer.parseInt(String.valueOf(help1.charAt(1)));
-            } catch (NumberFormatException e) {
+            if (game.firstEdLetter == -1 && game.secondEdLetter == -1) {
                 Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if (help.length() == 2 && help1.length() == 3) {
-            try {
-                 game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
-                if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0")) {
-                    game.secondEdNumber = 10;
+            if (help.length() == 2 && help1.length() == 2) {
+                try {
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
+                    game.secondEdNumber = Integer.parseInt(String.valueOf(help1.charAt(1)));
+                } catch (NumberFormatException e) {
+                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }
-                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-            } catch (NumberFormatException e) {
-                Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-            }
+            } else if (help.length() == 2 && help1.length() == 3) {
+                try {
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
+                    if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0")) {
+                        game.secondEdNumber = 10;
+                    } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                }
+            } else if (help.length() == 3 && help1.length() == 3) {
+                try {
+                    if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0") && String.valueOf(help.charAt(1)).equals("1") && String.valueOf(help.charAt(2)).equals("0")) {
+                        game.secondEdNumber = 10;
+                        game.firstEdNumber = 10;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                }
+            } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
-        else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-    }
-    void ButtonLengthThree() {
-
     }
 }

@@ -4,15 +4,11 @@ public class Game {
     int n = 11;
     int m = 11;
     int battle[][] = new int[n][m];
-//    int left = 170;
-//    int right = 240;
-//    int top = 200;
-//    int bottom = 130;
+    int battle1[][] = new int[n][m];
     int firstEdNumber, secondEdNumber, firstEdLetter, secondEdLetter, helpLetter1, helpLetter2;
-    int x = 170;
+    int x = 140;
     int y = 200;
-    int margin = 7;
-    int kl = 70;
+    int kl = 75;
     void fixingCoordinates() {}
     void definitionLetter(String letters) {
         switch (letters) {
@@ -71,11 +67,4 @@ public class Game {
                 helpLetter2 = -1;
         }
     }
-
-
-
-
-
-
-
 }

@@ -2,6 +2,7 @@ package com.example.morskoy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,18 +16,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class GameActivity extends AppCompatActivity {
-    LinearLayout drawView;
+    LinearLayout drawView, drawViewBot;
     Draw draw;
+    DrawBot drawBot;
     Game game;
     TextView tvHelp;
     Spinner spinnerChoose;
     LinearLayout editTexts;
-    Button btnSave;
+    Button btnSave, btnSaveAll;
     EditText edFirst, edSecond;
     String ships[] = new String[]{"Корабль", "Однопалубный", "Двухпалубный", "Трехпалубный", "Четырехпалубный"};
 
 
+    @SuppressLint({"MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
         w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
         drawView = findViewById(R.id.drawView);
+        drawViewBot = findViewById(R.id.drawViewBot);
         game = new Game();
         draw = new Draw(this, game);
         drawView.addView(draw);
@@ -41,8 +47,16 @@ public class GameActivity extends AppCompatActivity {
         spinnerChoose = findViewById(R.id.spinnerChoose);
         editTexts = findViewById(R.id.editTexts);
         btnSave = findViewById(R.id.btnSave);
+        btnSaveAll = findViewById(R.id.btnSaveAll);
         edFirst = findViewById(R.id.edFirst);
         edSecond = findViewById(R.id.edSecond);
+        btnSaveAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawViewBot.removeAllViews();
+                need();
+            }
+        });
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ships);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChoose.setAdapter(adapter);
@@ -215,5 +229,9 @@ public class GameActivity extends AppCompatActivity {
                 }
             } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
+    }
+    void need() {
+        drawBot = new DrawBot(this, game);
+        drawViewBot.addView(drawBot);
     }
 }

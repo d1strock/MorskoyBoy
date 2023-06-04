@@ -1,8 +1,8 @@
 package com.example.morskoy;
 
 public class Game {
-    int n = 11;
-    int m = 11;
+    int n = 12;
+    int m = 12;
     int battle[][] = new int[n][m];
     int battle1[][] = new int[n][m];
     int firstEdNumber, secondEdNumber, firstEdLetter, secondEdLetter, helpLetter1, helpLetter2;

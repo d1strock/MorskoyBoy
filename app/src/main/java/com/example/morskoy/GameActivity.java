@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout editTexts;
     Button btnSave, btnSaveAll;
     EditText edFirst, edSecond;
-    String ships[] = new String[]{"Корабль", "Однопалубный", "Двухпалубный", "Трехпалубный", "Четырехпалубный"};
+    ArrayList<String> ships = new ArrayList<>();
 
 
     @SuppressLint({"MissingInflatedId"})
@@ -50,6 +51,11 @@ public class GameActivity extends AppCompatActivity {
         btnSaveAll = findViewById(R.id.btnSaveAll);
         edFirst = findViewById(R.id.edFirst);
         edSecond = findViewById(R.id.edSecond);
+        ships.add("Корабль");
+        ships.add("Однопалубный");
+        ships.add("Двухпалубный");
+        ships.add("Трехпалубный");
+        ships.add("Четырехпалубный");
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +153,7 @@ public class GameActivity extends AppCompatActivity {
                                     game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
                                     game.battle[game.firstEdLetter][game.firstEdNumber + 2] = 1;
                                     draw.invalidate();
+                                    adapter.remove("Четырехпалубный");
                                 } else
                                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }

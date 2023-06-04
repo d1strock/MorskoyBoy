@@ -27,8 +27,8 @@ public class DrawBot extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.BLUE);
-        for (int i = 1; i < game.n; i++) {
-            for (int j = 1; j < game.m; j++) {
+        for (int i = 1; i < game.n - 1; i++) {
+            for (int j = 1; j < game.m - 1; j++) {
                 if (game.battle1[i][j] == 1) {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, green);
                 }
@@ -49,8 +49,8 @@ public class DrawBot extends View {
             case MotionEvent.ACTION_DOWN:
                 towardX = (int)event.getX();
                 towardY = (int)event.getY();
-                for (int i = 1; i < game.n; i++) {
-                    for (int j = 1; j < game.m; j++) {
+                for (int i = 1; i < game.n - 1; i++) {
+                    for (int j = 1; j < game.m - 1; j++) {
 //                        if (towardX > 170 + ((i - 1) * game.kl) && towardX < 170 + (i * game.kl) && towardY > 200 + ((j - 1) * game.kl) && towardY < 200 + (j * game.kl)) {
 //                            game.battle1[i][j] = 1;
 //                        }

@@ -60,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawViewBot.removeAllViews();
+                game.try1();
                 need();
             }
         });

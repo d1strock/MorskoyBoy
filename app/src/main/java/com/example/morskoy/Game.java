@@ -148,7 +148,64 @@ public class Game {
         } else flag = 2;
     }
     void fixingCoordinatesThree() {
-
+        if (secondEdLetter - firstEdLetter == 2 && firstEdNumber == secondEdNumber) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter+1][firstEdNumber] == 0
+                    && battle[firstEdLetter-1][firstEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0
+                    && battle[firstEdLetter][firstEdNumber-1] == 0 && battle[firstEdLetter][firstEdNumber+1] == 0 && battle[firstEdLetter+1][firstEdNumber-1] == 0
+                    && battle[firstEdLetter+1][firstEdNumber+1] == 0 && battle[secondEdLetter][secondEdNumber-1] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0
+                    && battle[secondEdLetter+1][secondEdNumber] == 0 && battle[secondEdLetter+1][secondEdNumber-1] == 0 && battle[secondEdLetter+1][secondEdNumber+1] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                battle[firstEdLetter + 1][firstEdNumber] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        } else if (secondEdNumber - firstEdNumber == 2 && firstEdLetter == secondEdLetter) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter][firstEdNumber+1] == 0
+                    && battle[firstEdLetter][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter+1][firstEdNumber-1] == 0
+                    && battle[firstEdLetter-1][firstEdNumber] == 0 && battle[firstEdLetter+1][firstEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0
+                    && battle[firstEdLetter+1][firstEdNumber+1] == 0 && battle[secondEdLetter-1][secondEdNumber] == 0 && battle[secondEdLetter+1][secondEdNumber] == 0
+                    && battle[secondEdLetter-1][secondEdNumber+1] == 0 && battle[secondEdLetter+1][secondEdNumber+1] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                battle[firstEdLetter][firstEdNumber + 1] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        }
+        else flag = 2;
+    }
+    void fixingCoordinatesFour() {
+        if (secondEdLetter - firstEdLetter == 3 && firstEdNumber == secondEdNumber) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter+1][firstEdNumber] == 0
+                    && battle[firstEdLetter+2][firstEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter+1][firstEdNumber-1] == 0
+                    && battle[firstEdLetter][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0
+                    && battle[firstEdLetter+1][firstEdNumber+1] == 0 && battle[firstEdLetter][firstEdNumber+1] == 0 && battle[secondEdLetter+1][secondEdNumber] == 0
+                    && battle[secondEdLetter+1][secondEdNumber-1] == 0 && battle[secondEdLetter+1][secondEdNumber+1] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0
+                    && battle[secondEdLetter][secondEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                battle[firstEdLetter + 1][firstEdNumber] = 1;
+                battle[firstEdLetter + 2][firstEdNumber] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        } else if (secondEdNumber - firstEdNumber == 3 && firstEdLetter == secondEdLetter) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter][firstEdNumber+1] == 0
+                    && battle[firstEdLetter][firstEdNumber+2] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0 && battle[firstEdLetter-1][firstEdNumber] == 0
+                    && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter][firstEdNumber-1] == 0 && battle[firstEdLetter+1][firstEdNumber-1] == 0
+                    && battle[firstEdLetter+1][firstEdNumber] == 0 && battle[firstEdLetter+1][firstEdNumber+1] == 0 && battle[secondEdLetter-1][secondEdNumber-1] == 0
+                    && battle[secondEdLetter-1][secondEdNumber] == 0 && battle[secondEdLetter-1][secondEdNumber+1] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0
+                    && battle[secondEdLetter+1][secondEdNumber+1] == 0 && battle[firstEdLetter+1][firstEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber-1] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                battle[firstEdLetter][firstEdNumber + 1] = 1;
+                battle[firstEdLetter][firstEdNumber + 2] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        }
+        else flag = 2;
     }
 
     void definitionLetter(String letters) {

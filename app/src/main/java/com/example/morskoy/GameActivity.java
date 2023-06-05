@@ -120,26 +120,15 @@ public class GameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 ButtonLengthTwo();
-                                if (game.secondEdLetter - game.firstEdLetter == 2 && game.firstEdNumber == game.secondEdNumber) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                    game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
+                                game.fixingCoordinatesThree();
+                                if (game.flag == 1) {
                                     countThree++;
                                     draw.invalidate();
                                     if (countThree == 2) {
                                         adapter.remove("Трехпалубный");
                                     }
-                                } else if (game.secondEdNumber - game.firstEdNumber == 2 && game.firstEdLetter == game.secondEdLetter) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                    game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
-                                    countThree++;
-                                    draw.invalidate();
-                                    if (countThree == 2) {
-                                        adapter.remove("Трехпалубный");
-                                    }
-                                } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                }
+                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -152,22 +141,12 @@ public class GameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 ButtonLengthTwo();
-                                if (game.secondEdLetter - game.firstEdLetter == 3 && game.firstEdNumber == game.secondEdNumber) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                    game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
-                                    game.battle[game.firstEdLetter + 2][game.firstEdNumber] = 1;
+                                game.fixingCoordinatesFour();
+                                if (game.flag == 1) {
                                     draw.invalidate();
                                     adapter.remove("Четырехпалубный");
-                                } else if (game.secondEdNumber - game.firstEdNumber == 3 && game.firstEdLetter == game.secondEdLetter) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                    game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
-                                    game.battle[game.firstEdLetter][game.firstEdNumber + 2] = 1;
-                                    draw.invalidate();
-                                    adapter.remove("Четырехпалубный");
-                                } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                }
+                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;

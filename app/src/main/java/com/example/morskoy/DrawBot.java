@@ -9,7 +9,7 @@ import android.view.View;
 
 public class DrawBot extends View {
     Game game;
-    int margin = 10;
+    int margin = 9;
     int towardX = 0;
     int towardY = 0;
     Paint white = new Paint();

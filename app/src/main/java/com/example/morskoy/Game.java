@@ -1,10 +1,13 @@
 package com.example.morskoy;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class Game {
     int n = 18;
     int m = 18;
+    int flag = 0;
     int battle[][] = new int[n][m];
     int battle1[][] = new int[n][m];
     int firstEdNumber, secondEdNumber, firstEdLetter, secondEdLetter, helpLetter1, helpLetter2;
@@ -14,74 +17,140 @@ public class Game {
     ArrayList<Integer> ships = new ArrayList<>();
     int first;
     int second;
+
     void try1() {
         ships.add(1);
         ships.add(1);
         ships.add(1);
         ships.add(1);
-        ships.add(2);
-        ships.add(2);
-        ships.add(2);
-        ships.add(3);
-        ships.add(3);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 battle1[i][j] = 0;
             }
         }
         while (!(ships.isEmpty())) {
-            for (int s = 0; s < ships.size(); s++) {
-                first = (int) (1 + Math.random() * 10);
-                second = (int) (1 + Math.random() * 10);
-                for (int i = 4; i < n - 4; i++) {
-                    for (int j = 4; j < m - 4; j++) {
-                        if (i == first && j == second && battle1[i][j] != 1) {
-                            if (ships.get(s).equals(1)) {
-                                if (battle1[i-1][j] == 0 && battle1[i+1][j] == 0 && battle1[i][j-1] == 0 && battle1[i][j+1] == 0 && battle1[i+1][j+1] == 0 && battle1[i-1][j-1] == 0 && battle1[i+1][j-1] == 0 && battle1[i-1][j+1] == 0) {
-                                    battle1[i][j] = 1;
-                                    ships.remove(s);
-                                }
-                            } else if (ships.get(s).equals(2)) {
-                                if (battle1[i][j+1] == 0 && battle1[i][j-1] == 0 && battle1[i-1][j] == 0 && battle1[i+1][j] == 0 && battle1[i-1][j-1] == 0 && battle1[i+1][j-1] == 0 && battle1[i][j+2] == 0 && battle1[i+1][j+1] == 0 && battle1[i-1][j+1] == 0 && battle1[i-1][j+2] == 0 && battle1[i+1][j+2] == 0) {
-                                    battle1[i][j] = 1;
-                                    battle1[i][j+1] = 1;
-                                    ships.remove(s);
-                                }
-                            } else if (ships.get(s).equals(3)) {
-                                if (battle1[i][j+1] == 0 && battle1[i][j+2] == 0 && battle1[i][j+3] == 0 && battle1[i][j-1] == 0 && battle1[i-1][j-1] == 0 && battle1[i+1][j-1] == 0 && battle1[i-1][j] == 0 && battle1[i+1][j] == 0 && battle1[i-1][j+1] == 0 && battle1[i+1][j+1] == 0 && battle1[i-1][j+2] == 0 && battle1[i+1][j+2] == 0 && battle1[i-1][j+3] == 0 && battle1[i+1][j+3] == 0) {
-                                    battle1[i][j] = 1;
-                                    battle1[i][j+1] = 1;
-                                    battle1[i][j+2] = 1;
-                                    ships.remove(s);
-                                }
-                            }
+            int s = 0;
+            first = (int) (1 + Math.random() * 10);
+            second = (int) (1 + Math.random() * 10);
+            for (int i = 4; i < n - 4; i++) {
+                for (int j = 4; j < m - 4; j++) {
+                    if (i == first && j == second && battle1[i][j] != 1) {
+                        if (battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i][j - 1] == 0
+                                && battle1[i][j + 1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j - 1] == 0
+                                && battle1[i + 1][j - 1] == 0 && battle1[i - 1][j + 1] == 0) {
+                            battle1[i][j] = 1;
+                            ships.remove(s);
                         }
                     }
                 }
             }
         }
-//        ships.add(1);
-//        ships.add(1);
-//        ships.add(1);
-//        while (!(ships.isEmpty())) {
-//            for (int s = 0; s < ships.size(); s++) {
-//                first = (int) (1 + Math.random() * 10);
-//                second = (int) (1 + Math.random() * 10);
-//                for (int i = 4; i < n - 4; i++) {
-//                    for (int j = 4; j < m - 4; j++) {
-//                        if (i == first && j == second && battle1[i][j] != 1) {
-//                            if (battle1[i][j+1] == 0 && battle1[i][j-1] == 0 && battle1[i-1][j] == 0 && battle1[i+1][j] == 0 && battle1[i-1][j-1] == 0 && battle1[i+1][j-1] == 0 && battle1[i][j+2] == 0 && battle1[i+1][j+1] == 0 && battle1[i-1][j+1] == 0 && battle1[i-1][j+2] == 0 && battle1[i+1][j+2] == 0) {
-//                                battle1[i][j] = 1;
-//                                battle1[i][j+1] = 1;
-//                                ships.remove(s);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        ships.add(1);
+        ships.add(1);
+        ships.add(1);
+        while (!(ships.isEmpty())) {
+            int s = 0;
+            first = (int) (1 + Math.random() * 10);
+            second = (int) (1 + Math.random() * 10);
+            for (int i = 4; i < n - 4; i++) {
+                for (int j = 4; j < m - 4; j++) {
+                    if (i == first && j == second && battle1[i][j] != 1) {
+                        if (battle1[i][j + 1] == 0 && battle1[i][j - 1] == 0 && battle1[i - 1][j] == 0
+                                && battle1[i + 1][j] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
+                                && battle1[i][j + 2] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 1] == 0
+                                && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0) {
+                            battle1[i][j] = 1;
+                            battle1[i][j + 1] = 1;
+                            ships.remove(s);
+                        }
+                    }
+                }
+            }
+        }
+        ships.add(1);
+        ships.add(1);
+        while (!(ships.isEmpty())) {
+            int s = 0;
+            first = (int) (1 + Math.random() * 10);
+            second = (int) (1 + Math.random() * 10);
+            for (int i = 4; i < n - 4; i++) {
+                for (int j = 4; j < m - 4; j++) {
+                    if (i == first && j == second && battle1[i][j] != 1) {
+                        if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0
+                                && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
+                                && battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i - 1][j + 1] == 0
+                                && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0
+                                && battle1[i - 1][j + 3] == 0 && battle1[i + 1][j + 3] == 0) {
+                            battle1[i][j] = 1;
+                            battle1[i][j + 1] = 1;
+                            battle1[i][j + 2] = 1;
+                            ships.remove(s);
+                        }
+                    }
+                }
+            }
+        }
+        ships.add(1);
+        while (!(ships.isEmpty())) {
+            int s = 0;
+            first = (int) (1 + Math.random() * 10);
+            second = (int) (1 + Math.random() * 10);
+            for (int i = 4; i < n - 4; i++) {
+                for (int j = 4; j < m - 4; j++) {
+                    if (i == first && j == second && battle1[i][j] != 1) {
+                        if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0 && battle1[i][j + 4] == 0
+                                && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i - 1][j] == 0 && battle1[i - 1][j + 1] == 0
+                                && battle1[i - 1][j + 2] == 0 && battle1[i - 1][j + 3] == 0 && battle1[i - 1][j + 4] == 0
+                                && battle1[i + 1][j - 1] == 0 && battle1[i + 1][j] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i + 1][j + 2] == 0
+                                && battle1[i + 1][j + 3] == 0 && battle1[i + 1][j + 4] == 0) {
+                            battle1[i][j] = 1;
+                            battle1[i][j + 1] = 1;
+                            battle1[i][j + 2] = 1;
+                            battle1[i][j + 3] = 1;
+                            ships.remove(s);
+                        }
+                    }
+                }
+            }
+        }
     }
-    void fixingCoordinates() {}
+
+    void fixingCoordinatesOne() {
+        if (battle[firstEdLetter - 1][firstEdNumber] == 0 && battle[firstEdLetter + 1][firstEdNumber] == 0 && battle[firstEdLetter][firstEdNumber - 1] == 0
+                && battle[firstEdLetter][firstEdNumber + 1] == 0 && battle[firstEdLetter + 1][firstEdNumber + 1] == 0 && battle[firstEdLetter - 1][firstEdNumber - 1] == 0
+                && battle[firstEdLetter + 1][firstEdNumber - 1] == 0 && battle[firstEdLetter - 1][firstEdNumber + 1] == 0) {
+            battle[firstEdLetter][firstEdNumber] = 1;
+            flag = 1;
+        }
+        else flag = 2;
+    }
+    void fixingCoordinatesTwo() {
+        if (secondEdLetter - firstEdLetter == 1 && firstEdNumber == secondEdNumber) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter-1][firstEdNumber] == 0
+                    && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber+1] == 0 && battle[firstEdLetter][firstEdNumber-1] == 0
+                    && battle[firstEdLetter][firstEdNumber+1] == 0 && battle[secondEdLetter+1][secondEdNumber] == 0 && battle[secondEdLetter+1][secondEdNumber-1] == 0
+                    && battle[secondEdLetter+1][secondEdNumber+1] == 0 && battle[secondEdLetter][secondEdNumber-1] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        } else if (secondEdNumber - firstEdNumber == 1 && firstEdLetter == secondEdLetter) {
+            if (battle[firstEdLetter][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber] == 0 && battle[firstEdLetter][firstEdNumber-1] == 0
+                    && battle[firstEdLetter-1][firstEdNumber-1] == 0 && battle[firstEdLetter+1][firstEdNumber-1] == 0 && battle[firstEdLetter-1][firstEdNumber] == 0
+                    && battle[firstEdLetter+1][firstEdNumber] == 0 && battle[secondEdLetter][secondEdNumber+1] == 0 && battle[secondEdLetter+1][secondEdNumber+1] == 0
+                    && battle[secondEdLetter-1][secondEdNumber+1] == 0 && battle[secondEdLetter+1][secondEdNumber] == 0 && battle[secondEdLetter-1][secondEdNumber] == 0) {
+                battle[firstEdLetter][firstEdNumber] = 1;
+                battle[secondEdLetter][secondEdNumber] = 1;
+                flag = 1;
+            }
+            else flag = 2;
+        } else flag = 2;
+    }
+    void fixingCoordinatesThree() {
+
+    }
+
     void definitionLetter(String letters) {
         switch (letters) {
             case "А":

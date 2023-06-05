@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
     Button btnSave, btnSaveAll;
     EditText edFirst, edSecond;
     ArrayList<String> ships = new ArrayList<>();
+    int countOne, countTwo, countThree;
 
 
     @SuppressLint({"MissingInflatedId"})
@@ -42,6 +43,9 @@ public class GameActivity extends AppCompatActivity {
         drawView = findViewById(R.id.drawView);
         drawViewBot = findViewById(R.id.drawViewBot);
         game = new Game();
+        countOne = 0;
+        countTwo = 0;
+        countThree = 0;
         draw = new Draw(this, game);
         drawView.addView(draw);
         tvHelp = findViewById(R.id.tvHelp);
@@ -56,14 +60,6 @@ public class GameActivity extends AppCompatActivity {
         ships.add("Двухпалубный");
         ships.add("Трехпалубный");
         ships.add("Четырехпалубный");
-        btnSaveAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawViewBot.removeAllViews();
-                game.try1();
-                need();
-            }
-        });
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ships);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChoose.setAdapter(adapter);
@@ -82,8 +78,15 @@ public class GameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 ButtonLengthOne();
-                                game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                draw.invalidate();
+                                game.fixingCoordinatesOne();
+                                if (game.flag == 1) {
+                                    countOne++;
+                                    draw.invalidate();
+                                    if (countOne == 4) {
+                                        adapter.remove("Однопалубный");
+                                    }
+                                }
+                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -96,16 +99,15 @@ public class GameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 ButtonLengthTwo();
-                                if (game.secondEdLetter - game.firstEdLetter == 1 && game.firstEdNumber == game.secondEdNumber) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
+                                game.fixingCoordinatesTwo();
+                                if (game.flag == 1) {
+                                    countTwo++;
                                     draw.invalidate();
-                                } else if (game.secondEdNumber - game.firstEdNumber == 1 && game.firstEdLetter == game.secondEdLetter) {
-                                    game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
-                                    game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
-                                    draw.invalidate();
-                                } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    if (countTwo == 3) {
+                                        adapter.remove("Двухпалубный");
+                                    }
+                                }
+                                else  Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -122,12 +124,20 @@ public class GameActivity extends AppCompatActivity {
                                     game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
                                     game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
                                     game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
+                                    countThree++;
                                     draw.invalidate();
+                                    if (countThree == 2) {
+                                        adapter.remove("Трехпалубный");
+                                    }
                                 } else if (game.secondEdNumber - game.firstEdNumber == 2 && game.firstEdLetter == game.secondEdLetter) {
                                     game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
                                     game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
                                     game.battle[game.firstEdLetter][game.firstEdNumber + 1] = 1;
+                                    countThree++;
                                     draw.invalidate();
+                                    if (countThree == 2) {
+                                        adapter.remove("Трехпалубный");
+                                    }
                                 } else
                                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
@@ -148,6 +158,7 @@ public class GameActivity extends AppCompatActivity {
                                     game.battle[game.firstEdLetter + 1][game.firstEdNumber] = 1;
                                     game.battle[game.firstEdLetter + 2][game.firstEdNumber] = 1;
                                     draw.invalidate();
+                                    adapter.remove("Четырехпалубный");
                                 } else if (game.secondEdNumber - game.firstEdNumber == 3 && game.firstEdLetter == game.secondEdLetter) {
                                     game.battle[game.firstEdLetter][game.firstEdNumber] = 1;
                                     game.battle[game.secondEdLetter][game.secondEdNumber] = 1;
@@ -168,6 +179,17 @@ public class GameActivity extends AppCompatActivity {
             }
         };
         spinnerChoose.setOnItemSelectedListener(itemSelectedListener);
+        btnSaveAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (adapter.getCount() == 1) {
+                    drawViewBot.removeAllViews();
+//                game.try1();
+                    need();
+                }
+                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     void ButtonLengthOne() {
         String only = edFirst.getText().toString();
@@ -176,19 +198,19 @@ public class GameActivity extends AppCompatActivity {
         } else {
             String let = String.valueOf(only.charAt(0));
             game.definitionLetter(let);
-            game.firstEdLetter = game.helpLetter1;
+            game.firstEdLetter = game.helpLetter1 + 3;
             if (game.firstEdLetter == -1) {
                 Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
             if (only.length() == 2) {
                 try {
-                    game.firstEdNumber = Integer.parseInt(String.valueOf(only.charAt(1)));
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(only.charAt(1))) + 3;
                 }catch (NumberFormatException e) {
                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }
             } else if (only.length() == 3) {
                 if (String.valueOf(only.charAt(1)).equals("1") && String.valueOf(only.charAt(2)).equals("0")) {
-                    game.firstEdNumber = 10;
+                    game.firstEdNumber = 10 + 3;
                 }
             }
             else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
@@ -203,25 +225,25 @@ public class GameActivity extends AppCompatActivity {
         } else {
             String letter = String.valueOf(help.charAt(0));
             game.definitionLetter(letter);
-            game.firstEdLetter = game.helpLetter1;
+            game.firstEdLetter = game.helpLetter1 + 3;
             String letter1 = String.valueOf(help1.charAt(0));
             game.definitionLetter(letter1);
-            game.secondEdLetter = game.helpLetter1;
+            game.secondEdLetter = game.helpLetter1 + 3;
             if (game.firstEdLetter == -1 && game.secondEdLetter == -1) {
                 Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
             if (help.length() == 2 && help1.length() == 2) {
                 try {
-                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
-                    game.secondEdNumber = Integer.parseInt(String.valueOf(help1.charAt(1)));
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1))) + 3;
+                    game.secondEdNumber = Integer.parseInt(String.valueOf(help1.charAt(1))) + 3;
                 } catch (NumberFormatException e) {
                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }
             } else if (help.length() == 2 && help1.length() == 3) {
                 try {
-                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1)));
+                    game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1))) + 3;
                     if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0")) {
-                        game.secondEdNumber = 10;
+                        game.secondEdNumber = 10 + 3;
                     } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 } catch (NumberFormatException e) {
                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
@@ -229,8 +251,8 @@ public class GameActivity extends AppCompatActivity {
             } else if (help.length() == 3 && help1.length() == 3) {
                 try {
                     if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0") && String.valueOf(help.charAt(1)).equals("1") && String.valueOf(help.charAt(2)).equals("0")) {
-                        game.secondEdNumber = 10;
-                        game.firstEdNumber = 10;
+                        game.secondEdNumber = 10 + 3;
+                        game.firstEdNumber = 10 + 3;
                     }
                 } catch (NumberFormatException e) {
                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();

@@ -68,9 +68,9 @@ public class GameActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 edFirst.setVisibility(View.INVISIBLE);
                 edSecond.setVisibility(View.INVISIBLE);
-                int item = position;
+                String item = adapter.getItem(position);
                 switch (item) {
-                    case 1:
+                    case "Однопалубный":
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.INVISIBLE);
                         edFirst.setText("");
@@ -84,13 +84,14 @@ public class GameActivity extends AppCompatActivity {
                                     draw.invalidate();
                                     if (countOne == 4) {
                                         adapter.remove("Однопалубный");
+                                        spinnerChoose.setSelection(0);
                                     }
                                 }
                                 else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
-                    case 2:
+                    case "Двухпалубный":
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.VISIBLE);
                         edFirst.setText("");
@@ -105,13 +106,14 @@ public class GameActivity extends AppCompatActivity {
                                     draw.invalidate();
                                     if (countTwo == 3) {
                                         adapter.remove("Двухпалубный");
+                                        spinnerChoose.setSelection(0);
                                     }
                                 }
                                 else  Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
-                    case 3:
+                    case "Трехпалубный":
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.VISIBLE);
                         edFirst.setText("");
@@ -126,13 +128,14 @@ public class GameActivity extends AppCompatActivity {
                                     draw.invalidate();
                                     if (countThree == 2) {
                                         adapter.remove("Трехпалубный");
+                                        spinnerChoose.setSelection(0);
                                     }
                                 }
                                 else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
-                    case 4:
+                    case "Четырехпалубный":
                         edFirst.setVisibility(View.VISIBLE);
                         edSecond.setVisibility(View.VISIBLE);
                         edFirst.setText("");
@@ -145,6 +148,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (game.flag == 1) {
                                     draw.invalidate();
                                     adapter.remove("Четырехпалубный");
+                                    spinnerChoose.setSelection(0);
                                 }
                                 else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
@@ -161,12 +165,17 @@ public class GameActivity extends AppCompatActivity {
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (adapter.getCount() == 1) {
-                    drawViewBot.removeAllViews();
-//                game.try1();
-                    need();
-                }
-                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                if (adapter.getCount() == 1) {
+//                    drawViewBot.removeAllViews();
+//                    need();
+//                    game.tryOne();
+//                    game.tryTwo();
+//                    game.tryThree();
+//                    game.tryFour();
+//                }
+//                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                drawViewBot.removeAllViews();
+                need();
             }
         });
     }

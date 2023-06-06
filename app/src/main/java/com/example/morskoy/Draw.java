@@ -8,7 +8,7 @@ import android.view.View;
 
 public class Draw extends View {
     Game game;
-    int margin = 9;
+    int margin = 10;
     Paint white = new Paint();
     Paint green = new Paint();
     public Draw(Context context, Game g) {
@@ -27,14 +27,14 @@ public class Draw extends View {
         for (int i = 4; i < game.n - 4; i++) {
             for (int j = 4; j < game.m - 4; j++) {
                 if (game.battle[i][j] == 1) {
-                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, green);
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, green);
                 }
                 else {
-                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y - game.kl, white);
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, white);
                 }
                 game.y = game.y + game.kl + margin;
             }
-            game.y = 200;
+            game.y = 125;
             game.x = game.x + game.kl + margin;
         }
         game.x = 140;

@@ -12,24 +12,27 @@ public class Game {
     int battle1[][] = new int[n][m];
     int firstEdNumber, secondEdNumber, firstEdLetter, secondEdLetter, helpLetter1, helpLetter2;
     int x = 140;
-    int y = 200;
+    int y = 125;
     int kl = 75;
-    ArrayList<Integer> ships = new ArrayList<>();
+    ArrayList<Integer> shipsOne = new ArrayList<>();
+    ArrayList<Integer> shipsTwo = new ArrayList<>();
+    ArrayList<Integer> shipsThree = new ArrayList<>();
+    ArrayList<Integer> shipsFour = new ArrayList<>();
+
     int first;
     int second;
 
-    void try1() {
-        ships.add(1);
-        ships.add(1);
-        ships.add(1);
-        ships.add(1);
+    void tryOne() {
+        shipsOne.add(1);
+        shipsOne.add(1);
+        shipsOne.add(1);
+        shipsOne.add(1);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 battle1[i][j] = 0;
             }
         }
-        while (!(ships.isEmpty())) {
-            int s = 0;
+        while (!(shipsOne.isEmpty())) {
             first = (int) (1 + Math.random() * 10);
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
@@ -39,17 +42,18 @@ public class Game {
                                 && battle1[i][j + 1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j - 1] == 0
                                 && battle1[i + 1][j - 1] == 0 && battle1[i - 1][j + 1] == 0) {
                             battle1[i][j] = 1;
-                            ships.remove(s);
+                            shipsOne.remove(0);
                         }
                     }
                 }
             }
         }
-        ships.add(1);
-        ships.add(1);
-        ships.add(1);
-        while (!(ships.isEmpty())) {
-            int s = 0;
+    }
+    void tryTwo() {
+        shipsTwo.add(1);
+        shipsTwo.add(1);
+        shipsTwo.add(1);
+        while (!(shipsTwo.isEmpty())) {
             first = (int) (1 + Math.random() * 10);
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
@@ -61,16 +65,17 @@ public class Game {
                                 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0) {
                             battle1[i][j] = 1;
                             battle1[i][j + 1] = 1;
-                            ships.remove(s);
+                            shipsTwo.remove(0);
                         }
                     }
                 }
             }
         }
-        ships.add(1);
-        ships.add(1);
-        while (!(ships.isEmpty())) {
-            int s = 0;
+    }
+    void tryThree() {
+        shipsThree.add(1);
+        shipsThree.add(1);
+        while (!(shipsThree.isEmpty())) {
             first = (int) (1 + Math.random() * 10);
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
@@ -84,15 +89,16 @@ public class Game {
                             battle1[i][j] = 1;
                             battle1[i][j + 1] = 1;
                             battle1[i][j + 2] = 1;
-                            ships.remove(s);
+                            shipsThree.remove(0);
                         }
                     }
                 }
             }
         }
-        ships.add(1);
-        while (!(ships.isEmpty())) {
-            int s = 0;
+    }
+    void tryFour() {
+        shipsFour.add(1);
+        while (!(shipsFour.isEmpty())) {
             first = (int) (1 + Math.random() * 10);
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
@@ -107,7 +113,7 @@ public class Game {
                             battle1[i][j + 1] = 1;
                             battle1[i][j + 2] = 1;
                             battle1[i][j + 3] = 1;
-                            ships.remove(s);
+                            shipsFour.remove(0);
                         }
                     }
                 }

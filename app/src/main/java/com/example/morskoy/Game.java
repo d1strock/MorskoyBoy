@@ -8,12 +8,15 @@ public class Game {
     int n = 18;
     int m = 18;
     int flag = 0;
+    int opr[][] = new int[n][m];
     int battle[][] = new int[n][m];
     int battle1[][] = new int[n][m];
     int firstEdNumber, secondEdNumber, firstEdLetter, secondEdLetter, helpLetter1, helpLetter2;
     int x = 140;
     int y = 125;
     int kl = 75;
+    ArrayList<String> letters = new ArrayList<>();
+
     ArrayList<Integer> shipsOne = new ArrayList<>();
     ArrayList<Integer> shipsTwo = new ArrayList<>();
     ArrayList<Integer> shipsThree = new ArrayList<>();
@@ -37,11 +40,11 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 1) {
+                    if (i == first && j == second && battle1[i][j] != 3) {
                         if (battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i][j - 1] == 0
                                 && battle1[i][j + 1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j - 1] == 0
                                 && battle1[i + 1][j - 1] == 0 && battle1[i - 1][j + 1] == 0) {
-                            battle1[i][j] = 1;
+                            battle1[i][j] = 3;
                             shipsOne.remove(0);
                         }
                     }
@@ -58,13 +61,13 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 1) {
+                    if (i == first && j == second && battle1[i][j] != 3) {
                         if (battle1[i][j + 1] == 0 && battle1[i][j - 1] == 0 && battle1[i - 1][j] == 0
                                 && battle1[i + 1][j] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
                                 && battle1[i][j + 2] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0) {
-                            battle1[i][j] = 1;
-                            battle1[i][j + 1] = 1;
+                            battle1[i][j] = 3;
+                            battle1[i][j + 1] = 3;
                             shipsTwo.remove(0);
                         }
                     }
@@ -80,15 +83,15 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 1) {
+                    if (i == first && j == second && battle1[i][j] != 3) {
                         if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0
                                 && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
                                 && battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0
                                 && battle1[i - 1][j + 3] == 0 && battle1[i + 1][j + 3] == 0) {
-                            battle1[i][j] = 1;
-                            battle1[i][j + 1] = 1;
-                            battle1[i][j + 2] = 1;
+                            battle1[i][j] = 3;
+                            battle1[i][j + 1] = 3;
+                            battle1[i][j + 2] = 3;
                             shipsThree.remove(0);
                         }
                     }
@@ -103,16 +106,16 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 1) {
+                    if (i == first && j == second && battle1[i][j] != 3) {
                         if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0 && battle1[i][j + 4] == 0
                                 && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i - 1][j] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i - 1][j + 2] == 0 && battle1[i - 1][j + 3] == 0 && battle1[i - 1][j + 4] == 0
                                 && battle1[i + 1][j - 1] == 0 && battle1[i + 1][j] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i + 1][j + 2] == 0
                                 && battle1[i + 1][j + 3] == 0 && battle1[i + 1][j + 4] == 0) {
-                            battle1[i][j] = 1;
-                            battle1[i][j + 1] = 1;
-                            battle1[i][j + 2] = 1;
-                            battle1[i][j + 3] = 1;
+                            battle1[i][j] = 3;
+                            battle1[i][j + 1] = 3;
+                            battle1[i][j + 2] = 3;
+                            battle1[i][j + 3] = 3;
                             shipsFour.remove(0);
                         }
                     }

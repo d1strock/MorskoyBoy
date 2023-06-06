@@ -46,6 +46,16 @@ public class GameActivity extends AppCompatActivity {
         countOne = 0;
         countTwo = 0;
         countThree = 0;
+        game.letters.add("А");
+        game.letters.add("Б");
+        game.letters.add("В");
+        game.letters.add("Г");
+        game.letters.add("Д");
+        game.letters.add("Е");
+        game.letters.add("Ж");
+        game.letters.add("З");
+        game.letters.add("И");
+        game.letters.add("К");
         draw = new Draw(this, game);
         drawView.addView(draw);
         tvHelp = findViewById(R.id.tvHelp);
@@ -176,6 +186,8 @@ public class GameActivity extends AppCompatActivity {
 //                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 drawViewBot.removeAllViews();
                 need();
+                game.tryOne();
+                game.tryTwo();
             }
         });
     }

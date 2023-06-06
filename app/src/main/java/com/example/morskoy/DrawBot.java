@@ -14,6 +14,7 @@ public class DrawBot extends View {
     int towardY;
     Paint white = new Paint();
     Paint green = new Paint();
+    Paint grey = new Paint();
 
     public DrawBot(Context context, Game j) {
         super(context);
@@ -21,6 +22,9 @@ public class DrawBot extends View {
         white.setStyle(Paint.Style.FILL);
         green.setColor(Color.GREEN);
         green.setStyle(Paint.Style.FILL);
+        green.setTextSize(60);
+        grey.setColor(Color.GRAY);
+        grey.setStyle(Paint.Style.FILL);
         game = j;
     }
 
@@ -28,13 +32,25 @@ public class DrawBot extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.BLUE);
+        for (int l = 0; l < game.letters.size(); l++) {
+            canvas.drawText(game.letters.get(l), game.x + (l * (game.kl + margin)) + game.kl / 5, game.y - margin, green);
+        }
+        for (int n = 0; n < 10; n++) {
+            canvas.drawText(Integer.toString(n+1), game.x - (game.kl), game.y + (n * (game.kl + margin)) + game.kl-margin, green);
+        }
         for (int i = 4; i < game.n - 4; i++) {
             for (int j = 4; j < game.m - 4; j++) {
                 if (game.battle1[i][j] == 1) {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, green);
+                } else if (game.battle1[i][j] == 2) {
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, grey);
                 } else {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, white);
                 }
+//                if (game.battle1[i][j] == 3) {
+//                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, green);
+//                }
+//                else canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, white);
                 game.y = game.y + game.kl + margin;
             }
             game.y = 125;
@@ -49,7 +65,25 @@ public class DrawBot extends View {
         for (int i = 1; i < game.n - 7; i++) {
             for (int j = 1; j < game.m - 7; j++) {
                 if (towardX > game.x + ((i - 1) * (game.kl + margin)) && towardX < game.x + ((margin * (i-1)) + (i * game.kl)) && towardY > game.y + ((j - 1) * (game.kl + margin)) && towardY < game.y + ((margin * (j-1)) + (j * game.kl))) {
-                    game.battle1[i+3][j+3] = 1;
+                    if (game.battle1[i+3][j+3] == 3) {
+                        game.battle1[i+3][j+3] = 1;
+                        if (game.battle1[i+3][j+4] != 3 && game.battle1[i+3][j+2] != 3 && game.battle1[i+4][j+3] != 3 && game.battle1[i+2][j+3] != 3) {
+                            game.battle1[i+3][j+4] = 2;
+                            game.battle1[i+3][j+2] = 2;
+                            game.battle1[i+4][j+3] = 2;
+                            game.battle1[i+2][j+3] = 2;
+                            game.battle1[i+2][j+2] = 2;
+                            game.battle1[i+4][j+2] = 2;
+                            game.battle1[i+2][j+4] = 2;
+                            game.battle1[i+4][j+4] = 2;
+                        }
+                    }
+                    else if (game.battle1[i+3][j+3] == 0) {
+                        game.battle1[i+3][j+3] = 2;
+                    }
+                    else if (game.battle1[i+3][j+3] == 2) {
+                        game.battle1[i+3][j+3] = 2;
+                    }
                 }
             }
         }

@@ -183,13 +183,13 @@ public class GameActivity extends AppCompatActivity implements Method {
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (adapter.getCount() == 1) {
+                if (adapter.getCount() == 4) {
                     drawViewBot.removeAllViews();
                     need();
                     game.tryOne();
-                    game.tryTwo();
-                    game.tryThree();
-                    game.tryFour();
+//                    game.tryTwo();
+//                    game.tryThree();
+//                    game.tryFour();
                     int decide = (int) (Math.random() * 3);
                     if (decide == 1) {
                         game.time = false;
@@ -210,7 +210,8 @@ public class GameActivity extends AppCompatActivity implements Method {
             game.time = true;
             tvWhoShoot.setText("Ваш ход");
         }
-//        Victory();
+//        VictoryPlayer();
+//        VictoryBot();
     }
 
     void ButtonLengthOne() {

@@ -3,7 +3,9 @@ package com.example.morskoy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -19,12 +21,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements Method {
+    static int countBot = 0;
+    static int countPlayer = 0;
+    SharedPreferences sharedPreferences;
+    final String SAVED_TEXT = "TEXT";
+    final String SAVED_NUM = "NUMBER";
     LinearLayout drawView, drawViewBot;
     Draw draw;
     DrawBot drawBot;
     Game game;
-    TextView tvHelp;
+    TextView tvHelp, tvWhoShoot;
     Spinner spinnerChoose;
     LinearLayout editTexts;
     Button btnSave, btnSaveAll;
@@ -59,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
         draw = new Draw(this, game);
         drawView.addView(draw);
         tvHelp = findViewById(R.id.tvHelp);
+        tvWhoShoot = findViewById(R.id.whoShoot);
         spinnerChoose = findViewById(R.id.spinnerChoose);
         editTexts = findViewById(R.id.editTexts);
         btnSave = findViewById(R.id.btnSave);
@@ -92,12 +100,12 @@ public class GameActivity extends AppCompatActivity {
                                 if (game.flag == 1) {
                                     countOne++;
                                     draw.invalidate();
-                                    if (countOne == 4) {
+                                    if (countOne == 3) {
                                         adapter.remove("Однопалубный");
                                         spinnerChoose.setSelection(0);
                                     }
-                                }
-                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -114,12 +122,12 @@ public class GameActivity extends AppCompatActivity {
                                 if (game.flag == 1) {
                                     countTwo++;
                                     draw.invalidate();
-                                    if (countTwo == 3) {
+                                    if (countTwo == 2) {
                                         adapter.remove("Двухпалубный");
                                         spinnerChoose.setSelection(0);
                                     }
-                                }
-                                else  Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -140,8 +148,8 @@ public class GameActivity extends AppCompatActivity {
                                         adapter.remove("Трехпалубный");
                                         spinnerChoose.setSelection(0);
                                     }
-                                }
-                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -159,8 +167,8 @@ public class GameActivity extends AppCompatActivity {
                                     draw.invalidate();
                                     adapter.remove("Четырехпалубный");
                                     spinnerChoose.setSelection(0);
-                                }
-                                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -175,22 +183,36 @@ public class GameActivity extends AppCompatActivity {
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (adapter.getCount() == 1) {
-//                    drawViewBot.removeAllViews();
-//                    need();
-//                    game.tryOne();
-//                    game.tryTwo();
-//                    game.tryThree();
-//                    game.tryFour();
-//                }
-//                else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-                drawViewBot.removeAllViews();
-                need();
-                game.tryOne();
-                game.tryTwo();
+                if (adapter.getCount() == 4) {
+                    drawViewBot.removeAllViews();
+                    need();
+                    game.tryOne();
+                    game.tryTwo();
+                    game.tryThree();
+                    game.tryFour();
+                    int decide = (int) (Math.random() * 3);
+                    if (decide == 1) {
+                        game.time = false;
+                    } else if (decide == 2) {
+                        game.time = true;
+                    }
+                    play();
+                } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    public void play() {
+        if (game.time == false) {
+            tvWhoShoot.setText("Ход Противника");
+            game.botShoot();
+            draw.invalidate();
+            game.time = true;
+            tvWhoShoot.setText("Ваш ход");
+        }
+        Victory();
+    }
+
     void ButtonLengthOne() {
         String only = edFirst.getText().toString();
         if (only.equals("")) {
@@ -205,15 +227,14 @@ public class GameActivity extends AppCompatActivity {
             if (only.length() == 2) {
                 try {
                     game.firstEdNumber = Integer.parseInt(String.valueOf(only.charAt(1))) + 3;
-                }catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }
             } else if (only.length() == 3) {
                 if (String.valueOf(only.charAt(1)).equals("1") && String.valueOf(only.charAt(2)).equals("0")) {
                     game.firstEdNumber = 10 + 3;
                 }
-            }
-            else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -260,8 +281,40 @@ public class GameActivity extends AppCompatActivity {
             } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
     }
+
     void need() {
         drawBot = new DrawBot(this, game);
         drawViewBot.addView(drawBot);
+    }
+    void saveData() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(SAVED_TEXT, countBot);
+        editor.putInt(SAVED_NUM, countPlayer);
+        editor.commit();
+    }
+
+    void loadData() {
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        Integer savedCountBot = sharedPreferences.getInt(SAVED_TEXT, 0);
+        Integer savedCountPlayer = sharedPreferences.getInt(SAVED_NUM, 0);
+    }
+    void Victory() {
+        if (game.countVictoryBot == 0) {
+            countBot++;
+            drawView.removeAllViews();
+            drawViewBot.removeAllViews();
+            loadData();
+            tvWhoShoot.setText("Вы проиграли. \n Ваших побед: " + countPlayer + "\n Победы компьютера: " + countBot);
+            saveData();
+        } else if (game.countVictoryPlayer == 0) {
+            countPlayer++;
+            drawView.removeAllViews();
+            drawViewBot.removeAllViews();
+            loadData();
+            tvWhoShoot.setText("Вы победили. \n Ваших побед: " + countPlayer + "\n Победы компьютера: " + countBot);
+            saveData();
+            game.time = false;
+        }
     }
 }

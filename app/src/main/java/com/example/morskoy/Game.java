@@ -5,9 +5,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Game {
+    int countVictoryBot;
+    int countVictoryPlayer;
     int n = 18;
     int m = 18;
     int flag = 0;
+    boolean time;
     int opr[][] = new int[n][m];
     int battle[][] = new int[n][m];
     int battle1[][] = new int[n][m];
@@ -24,14 +27,17 @@ public class Game {
 
     int first;
     int second;
-
     void tryOne() {
-        shipsOne.add(1);
         shipsOne.add(1);
         shipsOne.add(1);
         shipsOne.add(1);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
+                battle1[i][j] = 1;
+            }
+        }
+        for (int i = 4; i < n-4; i++) {
+            for (int j = 4; j < m-4; j++) {
                 battle1[i][j] = 0;
             }
         }
@@ -40,7 +46,7 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 3) {
+                    if (i == first+3 && j == second+3 && battle1[i][j] != 3) {
                         if (battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i][j - 1] == 0
                                 && battle1[i][j + 1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j - 1] == 0
                                 && battle1[i + 1][j - 1] == 0 && battle1[i - 1][j + 1] == 0) {
@@ -55,19 +61,25 @@ public class Game {
     void tryTwo() {
         shipsTwo.add(1);
         shipsTwo.add(1);
-        shipsTwo.add(1);
         while (!(shipsTwo.isEmpty())) {
             first = (int) (1 + Math.random() * 10);
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 3) {
+                    if (i == first+3 && j == second+3 && battle1[i][j] != 3) {
                         if (battle1[i][j + 1] == 0 && battle1[i][j - 1] == 0 && battle1[i - 1][j] == 0
                                 && battle1[i + 1][j] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
                                 && battle1[i][j + 2] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0) {
                             battle1[i][j] = 3;
                             battle1[i][j + 1] = 3;
+                            shipsTwo.remove(0);
+                        } else if (battle1[i+1][j] == 0 && battle1[i][j - 1] == 0 && battle1[i - 1][j-1] == 0
+                                && battle1[i - 1][j] == 0 && battle1[i - 1][j + 1] == 0 && battle1[i][j + 1] == 0
+                                && battle1[i+1][j-1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i+2][j - 1] == 0
+                                && battle1[i + 2][j] == 0 && battle1[i + 2][j + 1] == 0) {
+                            battle1[i][j] = 3;
+                            battle1[i+1][j] = 3;
                             shipsTwo.remove(0);
                         }
                     }
@@ -83,8 +95,18 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 3) {
-                        if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0
+                    if (i == first+3 && j == second+3 && battle1[i][j] != 3) {
+                        if (battle1[i+1][j] == 0 && battle1[i+2][j] == 0 && battle1[i+1][j-1] == 0
+                                && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i - 1][j] == 0
+                                && battle1[i - 1][j+1] == 0 && battle1[i][j+1] == 0 && battle1[i + 1][j + 1] == 0
+                                && battle1[i + 2][j - 1] == 0 && battle1[i + 3][j - 1] == 0 && battle1[i + 3][j] == 0
+                                && battle1[i+3][j + 1] == 0 && battle1[i + 2][j + 1] == 0) {
+                            battle1[i][j] = 3;
+                            battle1[i+1][j] = 3;
+                            battle1[i+2][j] = 3;
+                            shipsThree.remove(0);
+                        }
+                        else if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0
                                 && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i + 1][j - 1] == 0
                                 && battle1[i - 1][j] == 0 && battle1[i + 1][j] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i + 1][j + 1] == 0 && battle1[i - 1][j + 2] == 0 && battle1[i + 1][j + 2] == 0
@@ -106,7 +128,7 @@ public class Game {
             second = (int) (1 + Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
-                    if (i == first && j == second && battle1[i][j] != 3) {
+                    if (i == first+3 && j == second+3 && battle1[i][j] != 3) {
                         if (battle1[i][j + 1] == 0 && battle1[i][j + 2] == 0 && battle1[i][j + 3] == 0 && battle1[i][j + 4] == 0
                                 && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i - 1][j] == 0 && battle1[i - 1][j + 1] == 0
                                 && battle1[i - 1][j + 2] == 0 && battle1[i - 1][j + 3] == 0 && battle1[i - 1][j + 4] == 0
@@ -116,6 +138,17 @@ public class Game {
                             battle1[i][j + 1] = 3;
                             battle1[i][j + 2] = 3;
                             battle1[i][j + 3] = 3;
+                            shipsFour.remove(0);
+                        }
+                        else if (battle1[i+1][j] == 0 && battle1[i+2][j] == 0 && battle1[i+3][j] == 0 && battle1[i+1][j-1] == 0
+                                && battle1[i][j - 1] == 0 && battle1[i - 1][j - 1] == 0 && battle1[i - 1][j] == 0 && battle1[i - 1][j + 1] == 0
+                                && battle1[i][j + 1] == 0 && battle1[i + 1][j + 1] == 0 && battle1[i + 2][j - 1] == 0
+                                && battle1[i + 3][j - 1] == 0 && battle1[i + 4][j-1] == 0 && battle1[i + 4][j] == 0 && battle1[i + 4][j + 1] == 0
+                                && battle1[i + 3][j + 1] == 0 && battle1[i + 2][j + 1] == 0) {
+                            battle1[i][j] = 3;
+                            battle1[i+1][j] = 3;
+                            battle1[i+2][j] = 3;
+                            battle1[i+3][j] = 3;
                             shipsFour.remove(0);
                         }
                     }
@@ -215,6 +248,37 @@ public class Game {
             else flag = 2;
         }
         else flag = 2;
+    }
+    void botShoot() {
+        if (time == false) {
+            int first = 4 + (int)(Math.random() * 10);
+            int second = 4 + (int)(Math.random() * 10);
+            for (int i = 4; i < n - 4; i++) {
+                for (int j = 4; j < m - 4; j++) {
+                    if (i == first && j == second) {
+                        if (battle[i][j] == 1) {
+                            battle[i][j] = 3;
+                            break;
+                        } else if (battle[i][j] == 0) {
+                            battle[i][j] = 2;
+                            break;
+                        }
+                        else if (battle[i][j] == 2) {
+                            battle[i][j] = 2;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        countVictoryBot = 0;
+        for (int i = 4; i < n - 4; i++) {
+            for (int j = 4; j < m - 4; j++) {
+                if (battle[i][j] == 1) {
+                    countVictoryBot++;
+                }
+            }
+        }
     }
 
     void definitionLetter(String letters) {

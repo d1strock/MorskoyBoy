@@ -11,6 +11,8 @@ public class Draw extends View {
     int margin = 10;
     Paint white = new Paint();
     Paint green = new Paint();
+    Paint red = new Paint();
+    Paint grey = new Paint();
     public Draw(Context context, Game g) {
         super(context);
         white.setColor(Color.WHITE);
@@ -18,6 +20,10 @@ public class Draw extends View {
         green.setColor(Color.GREEN);
         green.setStyle(Paint.Style.FILL);
         green.setTextSize(60);
+        red.setColor(Color.RED);
+        red.setStyle(Paint.Style.FILL);
+        grey.setColor(Color.GRAY);
+        grey.setStyle(Paint.Style.FILL);
         game = g;
     }
 
@@ -33,12 +39,21 @@ public class Draw extends View {
         }
         for (int i = 4; i < game.n - 4; i++) {
             for (int j = 4; j < game.m - 4; j++) {
-                if (game.battle[i][j] == 1) {
+                if (game.battle[i][j] == 3) {
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, red);
+                } else if (game.battle[i][j] == 2) {
+                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, grey);
+                } else if (game.battle[i][j] == 1) {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, green);
-                }
-                else {
+                } else {
                     canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, white);
                 }
+//                if (game.battle[i][j] == 1) {
+//                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, green);
+//                }
+//                else {
+//                    canvas.drawRect(game.x, game.y, game.x + game.kl, game.y + game.kl, white);
+//                }
                 game.y = game.y + game.kl + margin;
             }
             game.y = 125;

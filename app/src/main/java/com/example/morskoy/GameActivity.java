@@ -105,7 +105,7 @@ public class GameActivity extends AppCompatActivity implements Method {
                                         spinnerChoose.setSelection(0);
                                     }
                                 } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -127,7 +127,7 @@ public class GameActivity extends AppCompatActivity implements Method {
                                         spinnerChoose.setSelection(0);
                                     }
                                 } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -149,7 +149,7 @@ public class GameActivity extends AppCompatActivity implements Method {
                                         spinnerChoose.setSelection(0);
                                     }
                                 } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -168,7 +168,7 @@ public class GameActivity extends AppCompatActivity implements Method {
                                     adapter.remove("Четырехпалубный");
                                     spinnerChoose.setSelection(0);
                                 } else
-                                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity implements Method {
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (adapter.getCount() == 4) {
+                if (adapter.getCount() == 1) {
                     drawViewBot.removeAllViews();
                     need();
                     game.tryOne();
@@ -197,7 +197,7 @@ public class GameActivity extends AppCompatActivity implements Method {
                         game.time = true;
                     }
                     play();
-                } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(GameActivity.this, "Не все корабли поставлены", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -210,31 +210,31 @@ public class GameActivity extends AppCompatActivity implements Method {
             game.time = true;
             tvWhoShoot.setText("Ваш ход");
         }
-        Victory();
+//        Victory();
     }
 
     void ButtonLengthOne() {
         String only = edFirst.getText().toString();
         if (only.equals("")) {
-            Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
         } else {
             String let = String.valueOf(only.charAt(0));
             game.definitionLetter(let);
             game.firstEdLetter = game.helpLetter1 + 3;
             if (game.firstEdLetter == -1) {
-                Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
             }
             if (only.length() == 2) {
                 try {
                     game.firstEdNumber = Integer.parseInt(String.valueOf(only.charAt(1))) + 3;
                 } catch (NumberFormatException e) {
-                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                 }
             } else if (only.length() == 3) {
                 if (String.valueOf(only.charAt(1)).equals("1") && String.valueOf(only.charAt(2)).equals("0")) {
                     game.firstEdNumber = 10 + 3;
                 }
-            } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -242,7 +242,7 @@ public class GameActivity extends AppCompatActivity implements Method {
         String help = edFirst.getText().toString();
         String help1 = edSecond.getText().toString();
         if (help.equals("") || help1.equals("")) {
-            Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
         } else {
             String letter = String.valueOf(help.charAt(0));
             game.definitionLetter(letter);
@@ -251,23 +251,23 @@ public class GameActivity extends AppCompatActivity implements Method {
             game.definitionLetter(letter1);
             game.secondEdLetter = game.helpLetter1 + 3;
             if (game.firstEdLetter == -1 && game.secondEdLetter == -1) {
-                Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
             }
             if (help.length() == 2 && help1.length() == 2) {
                 try {
                     game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1))) + 3;
                     game.secondEdNumber = Integer.parseInt(String.valueOf(help1.charAt(1))) + 3;
                 } catch (NumberFormatException e) {
-                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                 }
             } else if (help.length() == 2 && help1.length() == 3) {
                 try {
                     game.firstEdNumber = Integer.parseInt(String.valueOf(help.charAt(1))) + 3;
                     if (String.valueOf(help1.charAt(1)).equals("1") && String.valueOf(help1.charAt(2)).equals("0")) {
                         game.secondEdNumber = 10 + 3;
-                    } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                 } catch (NumberFormatException e) {
-                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                 }
             } else if (help.length() == 3 && help1.length() == 3) {
                 try {
@@ -276,9 +276,9 @@ public class GameActivity extends AppCompatActivity implements Method {
                         game.firstEdNumber = 10 + 3;
                     }
                 } catch (NumberFormatException e) {
-                    Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
                 }
-            } else Toast.makeText(GameActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(GameActivity.this, "Неправильная координата", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -299,15 +299,8 @@ public class GameActivity extends AppCompatActivity implements Method {
         Integer savedCountBot = sharedPreferences.getInt(SAVED_TEXT, 0);
         Integer savedCountPlayer = sharedPreferences.getInt(SAVED_NUM, 0);
     }
-    void Victory() {
-        if (game.countVictoryBot == 0) {
-            countBot++;
-            drawView.removeAllViews();
-            drawViewBot.removeAllViews();
-            loadData();
-            tvWhoShoot.setText("Вы проиграли. \n Ваших побед: " + countPlayer + "\n Победы компьютера: " + countBot);
-            saveData();
-        } else if (game.countVictoryPlayer == 0) {
+    public void VictoryPlayer() {
+        if (game.countVictoryPlayer == 0) {
             countPlayer++;
             drawView.removeAllViews();
             drawViewBot.removeAllViews();
@@ -315,6 +308,16 @@ public class GameActivity extends AppCompatActivity implements Method {
             tvWhoShoot.setText("Вы победили. \n Ваших побед: " + countPlayer + "\n Победы компьютера: " + countBot);
             saveData();
             game.time = false;
+        }
+    }
+    public void VictoryBot() {
+        if (game.countVictoryBot == 0) {
+            countBot++;
+            drawView.removeAllViews();
+            drawViewBot.removeAllViews();
+            loadData();
+            tvWhoShoot.setText("Вы проиграли. \n Ваших побед: " + countPlayer + "\n Победы компьютера: " + countBot);
+            saveData();
         }
     }
 }

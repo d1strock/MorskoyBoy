@@ -18,6 +18,7 @@ public class Game {
     int x = 140;
     int y = 125;
     int kl = 75;
+    Method method;
     ArrayList<String> letters = new ArrayList<>();
 
     ArrayList<Integer> shipsOne = new ArrayList<>();
@@ -250,20 +251,20 @@ public class Game {
         else flag = 2;
     }
     void botShoot() {
+        first = 4 + (int)(Math.random() * 10);
+        second = 4 + (int)(Math.random() * 10);
         if (time == false) {
-            int first = 4 + (int)(Math.random() * 10);
-            int second = 4 + (int)(Math.random() * 10);
             for (int i = 4; i < n - 4; i++) {
                 for (int j = 4; j < m - 4; j++) {
                     if (i == first && j == second) {
-                        if (battle[i][j] == 1) {
+                        if (battle[first][second] == 1) {
                             battle[i][j] = 3;
                             break;
-                        } else if (battle[i][j] == 0) {
+                        } else if (battle[first][second] == 0) {
                             battle[i][j] = 2;
                             break;
                         }
-                        else if (battle[i][j] == 2) {
+                        else if (battle[first][second] == 2) {
                             battle[i][j] = 2;
                             break;
                         }
@@ -271,7 +272,6 @@ public class Game {
                 }
             }
         }
-        countVictoryBot = 0;
         for (int i = 4; i < n - 4; i++) {
             for (int j = 4; j < m - 4; j++) {
                 if (battle[i][j] == 1) {

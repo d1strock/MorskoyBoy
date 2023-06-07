@@ -95,7 +95,6 @@ public class DrawBot extends View {
             }
         }
         invalidate();
-        game.countVictoryPlayer = 0;
         for (int i = 4; i < game.n - 4; i++) {
             for (int j = 4; j < game.m - 4; j++) {
                 if (game.battle1[i][j] == 3) {
@@ -103,6 +102,7 @@ public class DrawBot extends View {
                 }
             }
         }
+        method.VictoryPlayer();
         game.time = false;
         method.play();
         return true;

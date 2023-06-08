@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity implements Method {
         btnSaveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (adapter.getCount() == 4) {
+                if (adapter.getCount() == 1) {
                     drawViewBot.removeAllViews();
                     need();
                     game.tryOne();

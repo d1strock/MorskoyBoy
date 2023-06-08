@@ -187,9 +187,9 @@ public class GameActivity extends AppCompatActivity implements Method {
                     drawViewBot.removeAllViews();
                     need();
                     game.tryOne();
-//                    game.tryTwo();
-//                    game.tryThree();
-//                    game.tryFour();
+                    game.tryTwo();
+                    game.tryThree();
+                    game.tryFour();
                     int decide = (int) (Math.random() * 3);
                     if (decide == 1) {
                         game.time = false;

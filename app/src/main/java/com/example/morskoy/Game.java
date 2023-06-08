@@ -31,7 +31,6 @@ public class Game {
     void tryOne() {
         shipsOne.add(1);
         shipsOne.add(1);
-        shipsOne.add(1);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 battle1[i][j] = 1;
